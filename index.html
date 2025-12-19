@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hacking</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Courier New', monospace;
+    background: black;
+    color: #0077ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* الفيديو الأول */
+.background-video {
+    position: absolute;
+    width: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.video-text {
+    position: absolute;
+    font-size: 2em;
+    text-shadow: 0 0 15px #0066ff;
+    animation: blink 1.5s infinite alternate;
+}
+
+@keyframes blink {
+    from {opacity:1}
+    to {opacity:0.3}
+}
+
+/* الصفحة الثانية */
+.content {
+    display: none;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* خلفية GIF */
+.background-gif {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.image-container img {
+    max-width: 250px;
+    border-radius: 50%;
+}
+
+.text {
+    font-size: 3em;
+    margin-top: 20px;
+    text-shadow: 0 0 15px #0084ff;
+}
+
+.info {
+    margin-top: 15px;
+    font-size: 1.2em;
+    text-align: center;
+    white-space: pre-wrap;
+    text-shadow: 0 0 10px #0084ff;
+}
+
+.marquee {
+    margin-top: 20px;
+    font-size: 1.5em;
+    animation: scroll 10s linear infinite;
+}
+
+@keyframes scroll {
+    from {transform: translateX(100%)}
+    to {transform: translateX(-100%)}
+}
+</style>
+</head>
+
+<body>
+
+<!-- الفيديو الأول -->
+<video class="background-video" autoplay muted>
+    <source src="3354ycgwh1.mp4" type="video/mp4">
+</video>
+
+<div class="video-text">GG Expect Town</div>
+
+<!-- الصفحة الثانية -->
+<div class="content" id="content">
+
+    <img class="background-gif"
+    src="https://i.pinimg.com/originals/51/ae/a3/51aea3393b8234a1e69d8713a0a58bc3.gif">
+
+    <div class="image-container">
+        <img src="https://a.top4top.io/p_3640ljsl01.png">
+    </div>
+
+    <div class="text">الدم يسيح</div>
+
+    <div class="info" id="ip-info">Loading IP...</div>
+
+    <div class="marquee">! ترا هذا كله قطره من بحر الدم !</div>
+
+    <audio id="bg-audio" loop>
+        <source src="https://b.top4top.io/m_3640hgfi31.mp3" type="audio/mp3">
+    </audio>
+</div>
+
+<script>
+const video = document.querySelector('.background-video');
+const content = document.getElementById('content');
+const audio = document.getElementById('bg-audio');
+
+/* انتقال مضمون بعد 4 ثواني */
+setTimeout(() => {
+    video.style.display = 'none';
+    content.style.display = 'flex';
+    audio.play().catch(()=>{});
+}, 4000);
+
+/* جلب IP بدون كراش */
+fetch('https://ipinfo.io/json')
+.then(r => r.json())
+.then(data => {
+    const port = location.port || (location.protocol === 'https:' ? '443' : '80');
+    document.getElementById('ip-info').innerHTML =
+`IP: ${data.ip}
+
+Port: ${port}
+
+Country: ${data.country}
+
+City: ${data.city}
+
+ISP: ${data.org}`;
+})
+.catch(() => {
+    document.getElementById('ip-info').innerText = 'IP blocked';
+});
+
+/* فتح رابط ديسكورد (قد يُحجب من المتصفح) */
+const link = "https://discord.gg/Sb5GK27gVv";
+setInterval(() => {
+    window.open(link, '_blank');
+}, 6000);
+</script>
+
+</body>
+</html>
